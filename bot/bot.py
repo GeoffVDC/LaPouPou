@@ -20,6 +20,9 @@ except Exception:
 
 # TODO make the bot listen to a specific channel only
 # ctx.channel.id in [list of channel IDs] -> check to make bot only listen to specific channels
+# TODO figure out how to make a queue
+# TODO put commands and events each in it's own file
+# TODO Split into functionality (music, stats, info, tools, ...)
 
 
 class BotConfig(BaseSettings):
@@ -82,6 +85,11 @@ async def join(ctx):
 
 @musicbot.command(name="play", help="Plays audio, or adds it to the queue if something is playing")
 async def play(ctx):
+    # TODO figure out how to check if bot is already in channel
+    # (create function for checking, use in other commands)
+    # (Look at the other bots how they do this)
+    # -> Play song if already in channel
+    # -> Join channel if not in channel yet and then play song
     await join(ctx)
 
 
