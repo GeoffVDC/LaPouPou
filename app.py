@@ -26,6 +26,7 @@ class BotConfig(BaseSettings):
     BOT_TOKEN: SecretStr
 
 
+# TODO take a look at this and check how other projects do it because the youtube dude doesn't get it
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
