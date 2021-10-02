@@ -19,6 +19,7 @@ class BotConfig(BaseSettings):
 
 config = BotConfig()
 
+
 YTDL_OPTIONS = {
     'format': 'bestaudio/best',
     'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
@@ -65,7 +66,7 @@ async def pause(ctx):
     pass
 
 
-@musicbot.command(name="join", help="Disconnect the bot from the server")
+@musicbot.command(name="join", help="Join your channel")
 async def join(ctx):
     pass
 
@@ -80,6 +81,11 @@ async def skip(ctx):
     pass
 
 
+@musicbot.command(name="clear", help="Clear the queue")
+async def clear(ctx):
+    pass
+
+
 @musicbot.command(name="ping", help="Check latency of the bot")
 async def ping(ctx):
     pass
@@ -89,3 +95,5 @@ async def ping(ctx):
 async def hoya(ctx):
     # TODO pause playback and give a random hoya from a collection of hoyas?
     pass
+
+musicbot.run(config.BOT_TOKEN.get_secret_value())

@@ -8,5 +8,6 @@ Personal discord music bot to enjoy some tunes while chatting
 - `!stop` - stop playing audio
 - `!disconnect` - leave the discord server
 - `!skip` - skip current song
+- `!clear` - clear the queue
 - `!ping` - check latency
 - `!hoya` - ask for a hoya
