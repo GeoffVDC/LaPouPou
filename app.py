@@ -1,9 +1,15 @@
 import logging
 
+import discord
+from discord.activity import
+
 import youtube_dl
 from discord.ext import commands
 from pydantic import BaseSettings
 from pydantic.types import SecretStr
+from random import choice
+
+from data import WELCOME_MESSAGES, YTDL_OPTIONS, BOT_STATUS
 
 try:
     from dotenv import load_dotenv
@@ -12,33 +18,15 @@ try:
 except Exception:
     logging.error("Failed to load env vars")
 
+# TODO make the bot listen to a specific channel only
+# ctx.channel.id in [list of channel IDs] -> check to make bot only listen to specific channels
+
 
 class BotConfig(BaseSettings):
     BOT_TOKEN: SecretStr
 
 
 config = BotConfig()
-
-
-YTDL_OPTIONS = {
-    'format': 'bestaudio/best',
-    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
-    'restrictfilenames': True,
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'logtostderr': False,
-    'quiet': True,
-    'no_warnings': True,
-    'default_search': 'auto',
-    'source_address': '0.0.0.0',  # bind to ipv4 since ipv6 addresses cause issues sometimes
-}
-
-BOT_STATUS = [
-    "Offline",
-    "Jamming to some tunes",
-    "Idle",
-]
 
 ytdl = youtube_dl.YoutubeDL(YTDL_OPTIONS)
 musicbot = commands.Bot(command_prefix="!")
@@ -47,27 +35,29 @@ musicbot = commands.Bot(command_prefix="!")
 # EVENTS
 @musicbot.event
 async def on_ready():
-    pass
+    print("Bot is online")
+    logging.info("Bot is online")
 
 
 @musicbot.event
 async def on_disconnect():
-    pass
+    musicbot.change_presence(activity=discord.Game("Offline"))
+    logging.info("Bot disconnecting")
 
 
 # COMMANDS
+@musicbot.command(name="join", help="Join your channel")
+async def join(ctx):
+    await ctx.send(choice(WELCOME_MESSAGES))
+
+
 @musicbot.command(name="play", help="Plays audio, or adds it to the queue if something is playing")
 async def play(ctx):
-    pass
+    await join(ctx)
 
 
 @musicbot.command(name="pause", help="Pauses the current audio")
 async def pause(ctx):
-    pass
-
-
-@musicbot.command(name="join", help="Join your channel")
-async def join(ctx):
     pass
 
 
@@ -88,7 +78,7 @@ async def clear(ctx):
 
 @musicbot.command(name="ping", help="Check latency of the bot")
 async def ping(ctx):
-    pass
+    await ctx.send(f'Latency: {round(musicbot.latency*1000)}ms')
 
 
 @musicbot.command(name="hoya", help="Ask for a hoooooooyaaaaaa")
