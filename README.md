@@ -1,7 +1,7 @@
-# La Pou Pou music bot
-Personal discord music bot to enjoy some tunes while chatting
+# La Pou Pou
+Discord utility bot
 
-## Commands
+## Media Commands
 - `!join` - join your channel
 - `!play` - play a song
 - `!pause` - pause the current song
@@ -11,3 +11,6 @@ Personal discord music bot to enjoy some tunes while chatting
 - `!clear` - clear the queue
 - `!ping` - check latency
 - `!hoya` - ask for a hoya
+
+## Future features
+...
