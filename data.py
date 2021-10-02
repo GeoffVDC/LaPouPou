@@ -1,3 +1,5 @@
+from enum import Enum
+
 WELCOME_MESSAGES = [
     "¡Hola, bitchitos!",
     "Gutten tag",
@@ -24,8 +26,8 @@ YTDL_OPTIONS = {
     'source_address': '0.0.0.0',  # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
-BOT_STATUS = [
-    "Offline",
-    "Jamming to some tunes",
-    "Idle",
-]
+
+class BOT_STATUS(Enum):
+    OFFLINE = "Offline"
+    PLAYING = "Jamming to some tunes"
+    ONLINE = "Online"

@@ -1,7 +1,6 @@
 import logging
 
 import discord
-from discord.activity import
 
 import youtube_dl
 from discord.ext import commands
@@ -41,7 +40,7 @@ async def on_ready():
 
 @musicbot.event
 async def on_disconnect():
-    musicbot.change_presence(activity=discord.Game("Offline"))
+    await musicbot.change_presence(activity=discord.Game(BOT_STATUS.OFFLINE))
     logging.info("Bot disconnecting")
 
 
