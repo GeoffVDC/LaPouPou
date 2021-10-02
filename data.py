@@ -26,6 +26,9 @@ YTDL_OPTIONS = {
     'source_address': '0.0.0.0',  # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
+FFMPEG_OPTIONS = {
+    'options': '-vn',
+}
 
 class BOT_STATUS(Enum):
     OFFLINE = "Offline"
