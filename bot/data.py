@@ -1,5 +1,3 @@
-from enum import Enum
-
 WELCOME_MESSAGES = [
     "¡Hola, bitchitos!",
     "Gutten tag",
@@ -30,7 +28,4 @@ FFMPEG_OPTIONS = {
     'options': '-vn',
 }
 
-class BOT_STATUS(Enum):
-    OFFLINE = "Offline"
-    PLAYING = "Jamming to some tunes"
-    ONLINE = "Online"
+DISCONNECT_ALIASES = ["leave", "getlost", "fuckoff"]
