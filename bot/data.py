@@ -8,11 +8,12 @@ WELCOME_MESSAGES = [
     "Pip pip cheerio chaps",
     "What's up, bitches",
     "Skkrrrrrrraaaaa",
+    "HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOYYYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 ]
 
 YTDL_OPTIONS = {
     'format': 'bestaudio/best',
-    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
+    'outtmpl': 'videos/%(extractor)s-%(id)s-%(title)s.%(ext)s',
     'restrictfilenames': True,
     'noplaylist': True,
     'nocheckcertificate': True,

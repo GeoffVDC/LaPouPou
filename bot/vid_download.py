@@ -1,11 +1,13 @@
 from youtube_dl import YoutubeDL
 from youtubesearchpython import VideosSearch
-from bot.data import YTDL_OPTIONS
+from data import YTDL_OPTIONS
 
 yt_watch = "https://www.youtube.com/watch?v="
+# This might fix potential issues but it works without for now
+# youtube_dl.utils.bug_reports_message = lambda: ''
 
 
-def download_youtube_video_from_url_or_query(url_or_query: str):
+def download_youtube_video_from_url_or_query(url_or_query: str) -> None:
     """
     "Download a youtube video from a given url or download the top result if param is a search query
     :param url_or_query:

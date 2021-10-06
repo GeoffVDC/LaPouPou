@@ -1,23 +1,13 @@
-import asyncio
-import functools
 import logging
 from random import choice
 
 import discord
-import youtube_dl
 from discord.ext import commands
-from pydantic import BaseSettings
-from pydantic.types import SecretStr
+from config import config
 
-from data import WELCOME_MESSAGES, YTDL_OPTIONS, DISCONNECT_ALIASES, FFMPEG_OPTIONS
+from data import WELCOME_MESSAGES, DISCONNECT_ALIASES
 from enums import BOT_STATUS
 
-try:
-    from dotenv import load_dotenv
-
-    load_dotenv(verbose=True)
-except:
-    logging.error("Failed to load env vars")
 
 
 # TODO make the bot listen to a specific channel only
@@ -27,19 +17,7 @@ except:
 # TODO Split into functionality (music, stats, info, tools, ...)
 
 
-class BotConfig(BaseSettings):
-    BOT_TOKEN: SecretStr
-
-
-config = BotConfig()
-
-youtube_dl.utils.bug_reports_message = lambda: ''
 musicbot = commands.Bot(command_prefix="!")
-
-
-def download(search):
-    with youtube_dl.YoutubeDL() as ytdl:
-        ytdl.download([search])
 
 
 # EVENTS
