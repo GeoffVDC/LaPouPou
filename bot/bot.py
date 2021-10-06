@@ -3,12 +3,10 @@ from random import choice
 
 import discord
 from discord.ext import commands
-from config import config
 
+from config import config
 from data import WELCOME_MESSAGES, DISCONNECT_ALIASES
 from enums import BOT_STATUS
-
-
 
 # TODO make the bot listen to a specific channel only
 # ctx.channel.id in [list of channel IDs] -> check to make bot only listen to specific channels
