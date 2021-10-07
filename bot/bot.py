@@ -2,11 +2,13 @@ import logging
 from random import choice
 
 import discord
+import data
 from discord.ext import commands
 
 from config import config
-from data import WELCOME_MESSAGES, DISCONNECT_ALIASES
+
 from enums import BOT_STATUS
+from utils import get_guild
 
 # TODO make the bot listen to a specific channel only
 # ctx.channel.id in [list of channel IDs] -> check to make bot only listen to specific channels
@@ -15,7 +17,7 @@ from enums import BOT_STATUS
 # TODO Split into functionality (music, stats, info, tools, ...)
 
 
-musicbot = commands.Bot(command_prefix="!")
+musicbot = commands.Bot(command_prefix=data.BOT_PREFIX)
 
 
 # EVENTS
@@ -32,20 +34,21 @@ async def on_disconnect():
 
 
 # COMMANDS
-@musicbot.command(name="join", help="Join your channel")
+@musicbot.command(name="join", help=data.HELP_JOIN, description=data.DESCR_JOIN)
 async def join(ctx):
     if not ctx.message.author.voice:
-        await ctx.send("You are not in a voice channel. Join a channel to summon me.")
+        await ctx.send(data.NOT_CONNECTED_MESSAGE)
         return
     else:
         channel = ctx.message.author.voice.channel
     await channel.connect()
-    await ctx.send(choice(WELCOME_MESSAGES))
+    await ctx.send(choice(data.WELCOME_MESSAGES))
 
 
 @musicbot.command(name="play", help="Plays audio, or adds it to the queue if something is playing")
 async def play(ctx, search):
-    pass
+    current_guild = get_guild(musicbot, ctx)
+
 
 
 @musicbot.command(name="pause", help="Pauses the current audio")
@@ -54,13 +57,13 @@ async def pause(ctx):
 
 
 @musicbot.command(name="disconnect",
-                  help=f"Leave channel. Also: {' '.join(DISCONNECT_ALIASES)}",
-                  aliases=DISCONNECT_ALIASES)
+                  help=f"Leave channel. Also: {' '.join(data.DISCONNECT_ALIASES)}",
+                  aliases=data.DISCONNECT_ALIASES)
 async def disconnect(ctx):
     if ctx.message.guild.voice_client and ctx.message.guild.voice_client.is_connected():
         await ctx.message.guild.voice_client.disconnect()
     else:
-        await ctx.send("I am not connected to a voice channel")
+        await ctx.send(data.NOT_CONNECTED_MESSAGE)
 
 
 @musicbot.command(name="skip", help="Skip The current audio")

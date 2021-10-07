@@ -1,10 +1,11 @@
 FROM python:3.9-slim
-COPY /bot requirements.txt /bot/
-# TODO figure how to install ffmpeg on docker image
-# RUN apt-get install ffmpeg
+COPY requirements.txt /bot/requirements.txt
 WORKDIR /bot
-RUN apt-get -y update \
-    && apt-get install -y ffmpeg \
-    && pip install -r /bot/requirements.txt
+RUN apt-get -y update && \
+    apt-get install --no-install-recommends -y ffmpeg && \
+    pip install --no-cache-dir -r /bot/requirements.txt && \
+    rm -rf /var/lib/apt/lists/*
 # TODO ADD DISCORD BOT TOKEN TO ENV
+WORKDIR /bot
+COPY ./bot /bot
 CMD ["python", "bot.py"]

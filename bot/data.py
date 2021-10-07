@@ -25,8 +25,11 @@ YTDL_OPTIONS = {
     'source_address': '0.0.0.0',  # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
-FFMPEG_OPTIONS = {
-    'options': '-vn',
-}
+FFMPEG_OPTIONS = {'options': '-vn'}
+
+BOT_PREFIX="!"
 
 DISCONNECT_ALIASES = ["leave", "getlost", "fuckoff"]
+NOT_CONNECTED_MESSAGE = "You are not in a voice channel. Join a channel to summon me."
+HELP_JOIN = "Join your channel"
+DESCR_JOIN = "Make the bot join your current voice channel"
